@@ -1,59 +1,140 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Gestor ADSO
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Nombre y propósito del proyecto
 
-## About Laravel
+Gestor ADSO es un proyecto desarrollado en Laravel para administrar procesos, tareas y recursos relacionados con el programa ADSO. Su objetivo es centralizar la gestión del flujo de trabajo del equipo, facilitar el control de información y permitir una ejecución más ordenada y reproducible del proyecto en diferentes entornos.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Herramientas y versiones reales
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+> Importante: NO escribir versiones inventadas. NO indicar automáticamente "Laravel 10.x". Registrar exactamente el resultado del computador.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Ejecutar y copiar el resultado real:
 
-## Learning Laravel
+```bash
+php -v
+composer -V
+php artisan --version
+git --version
+node -v
+npm -v
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Resultados verificados en este equipo:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```bash
+PHP 8.2.12 (cli) (built: Oct 24 2023 21:15:15) (ZTS Visual C++ 2019 x64)
+Composer version 2.10.3 2026-08-27 13:34:23
+Laravel Framework 12.69.3
+git version 2.54.0.windows.1
+v24.19.0
+11.17.0
+```
 
-## Laravel Sponsors
+## Pasos de instalación y configuración de .env
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. Clonar el repositorio:
 
-### Premium Partners
+```bash
+git clone <url-del-repositorio>
+cd gestor-adso
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+2. Instalar dependencias de PHP:
 
-## Contributing
+```bash
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3. Crear el archivo de entorno:
 
-## Code of Conduct
+```bash
+copy .env.example .env
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+En Windows PowerShell:
 
-## Security Vulnerabilities
+```powershell
+Copy-Item .env.example .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+4. Generar la clave de la aplicación:
 
-## License
+```bash
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. Configurar la base de datos.
+
+Este proyecto usa SQLite por defecto en Laravel. En el archivo `.env` se debe verificar que la configuración sea similar a:
+
+```env
+DB_CONNECTION=sqlite
+```
+
+Si se usa SQLite, normalmente no es necesario definir `DB_DATABASE` si se trabaja con la base por defecto dentro de `database/database.sqlite`.
+
+## Creación de BD y ejecución de migraciones
+
+1. Crear la base de datos SQLite si no existe:
+
+```bash
+php artisan migrate:install
+```
+
+2. Ejecutar las migraciones:
+
+```bash
+php artisan migrate
+```
+
+3. Si se requiere instalar también dependencias de frontend:
+
+```bash
+npm install
+npm run build
+```
+
+## Cómo ejecutar el servidor
+
+Para iniciar el proyecto en modo local:
+
+```bash
+php artisan serve
+```
+
+Luego abrir en el navegador:
+
+```text
+http://127.0.0.1:8000
+```
+
+También puede ejecutarse con el stack completo de Laravel + Vite:
+
+```bash
+composer run dev
+```
+
+## Evidencias del proceso
+
+Se recomienda documentar en el README la evidencia real del entorno con capturas o copias del resultado de las siguientes verificaciones:
+
+- `php -v`
+- `composer -V`
+- `php artisan --version`
+- `git --version`
+- `node -v`
+- `npm -v`
+
+Esto permite reproducir el proyecto con las mismas herramientas y versiones en otro equipo sin errores por versiones incompatibles.
+
+## Requisitos recomendados
+
+- PHP 8.2+
+- Composer 2.x
+- Node.js 20+
+- npm 10+
+- Git
+
+## Licencia
+
+Este proyecto se distribuye bajo la licencia del repositorio y de la organización que lo desarrolla.
